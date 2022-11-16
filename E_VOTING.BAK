@@ -1,0 +1,141 @@
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<fstream.h>
+void main()
+{
+	char adharno[15],eleno[12];
+	int age,c=0,x=0,A1=0,B1=0,C1=0,D1=0,E1=0,F1=0;
+	char name[30],party,v[5];
+	clrscr();
+	ofstream f1;
+	v1:
+	cout<<"******----- ELECTRONIC VOTING SYSTEM -----******"<<endl;
+	cout<<"Enter Name of candidate: "<<endl;
+	cin>>name;
+	cout<<"Enter Aadhar number of candidate (12 digit): "<<endl;
+	cin>>adharno;
+	c=strlen(adharno);
+	if(c==12)
+	{
+		v2:
+		//cout<<"Aadhar number is valid          : "<<adharno<<endl;
+		cout<<"Enter Election card number of candidate \n(It must contain 1st 5 digits as alphabets then 4 numbers and last as alphabet): "<<endl;
+		cin>>eleno;
+		x=strlen(eleno);
+		if(x==10)
+		{
+			//cout<<"Election card number is valid   : "<<eleno<<endl;
+			cout<<"Enter Age of candidate: "<<endl;
+			cin>>age;
+			if(age>=18)
+			{
+				cout<<"Candidate is allowed to vote"<<endl;
+				getch();
+				clrscr();
+				cout<<"Now proceed further for voting-> "<<endl;
+				cout<<"Select the party you want to vote:-"<<endl;
+				cout<<"Press A to vote Bhartiya Janta Party       - Shri Narendra Modi"<<endl;
+				cout<<"Press B to vote Indian National Congress   - Shri Rahul    Gandhi"<<endl;
+				cout<<"Press C to vote Aam Aadmi Party            - Shri Arwind   kejrival"<<endl;
+				cout<<"Press D to vote National People's Party    - Shri Conrad   Sangma"<<endl;
+				cout<<"Press E to vote Nationalist Congress Party - Shri Sharad   Pawar"<<endl;
+				cout<<"Press F to vote none"<<endl;
+				cout<<"\n Enter your Vote.....:";
+				cin>>party;
+				switch(party)
+				{
+					case 'A':
+					//cout<<"You voted for: Bhartiya Janta Party"<<endl;
+					A1++;
+					break;
+
+					case 'B':
+					//cout<<"You voted for: Indian National Congress"<<endl;
+					B1++;
+					break;
+
+					case 'C':
+					//cout<<"You voted for: Aam Aadmi Party"<<endl;
+					C1++;
+					break;
+
+					case 'D':
+					//cout<<"You voted for: National People's Party"<<endl;
+					D1++;
+					break;
+
+					case 'E':
+					//cout<<"You voted for: Nationalist Congress Party"<<endl;
+					E1++;
+					break;
+					default:
+					F1++;
+					break;
+
+				}
+				cout<<"\n Any More Votter:(yes/no)";
+				cin>>v;
+				clrscr();
+				if(strcmp(v,"yes")==0)
+				{
+					goto v1;
+				}
+				else
+				{
+					cout<<"Votting is over... see the result..."<<endl;
+					cout<<"***************************************************************"<<endl;
+					cout<<"** End Result of Voting:-"<<endl;
+					cout<<"** Candidates voted for Bhartiya Janta Party      : "<<A1<<" **"<<endl;
+					cout<<"** Candidates voted for Indian National Congress  : "<<B1<<" **"<<endl;
+					cout<<"** Candidates voted for Aam Aadmi Party           : "<<C1<<" **"<<endl;
+					cout<<"** Candidates voted for National People's Party   : "<<D1<<" **"<<endl;
+					cout<<"** Candidates voted for Nationalist Congress Party: "<<E1<<" **"<<endl;
+					cout<<"** Candidates voted for None                      : "<<F1<<" **"<<endl;
+					cout<<"***************************************************************"<<endl;
+					getch();
+					f1.open("Result.txt",ios::out);
+					f1<<"BJP : "<<A1<<endl;
+					f1<<"INC : "<<B1<<endl;
+					f1<<"AAP : "<<C1<<endl;
+					f1<<"NPC : "<<D1<<endl;
+					f1<<"NCP : "<<E1<<endl;
+					f1<<"NONE: "<<F1<<endl;
+					f1.close();
+					clrscr();
+
+					/*ifstream f2;
+					f2.open("Result.txt"),ios::in);
+					f2>>A1;
+					f2>>B1;
+					f2>>C1;
+					f2>>D1;
+					f2>>E1;
+					f2>>F1*/
+					exit (0);
+				}
+			}
+			else
+			{
+				cout<<"Candidate is Underage and is not allowed to vote"<<endl;
+				clrscr();
+				goto v1;
+			}
+		}
+		else
+		{
+			cout<<"Election card number is invalid :"<<eleno<<endl;
+			cout<<"Try Again with correct Election card number"<<endl;
+			goto v2;
+		}
+
+	}
+	else
+	{
+		cout<<"Aadhar number is invalid        : "<<adharno<<endl;
+		cout<<"Try Again with correct Aadhar number"<<endl;
+		goto v1;
+	}
+	getch();
+}
